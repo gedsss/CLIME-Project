@@ -3,7 +3,7 @@ event.preventDefault()
 
 let value = document.querySelector('#searchInput').value
 
-warning('Carregando...')
+warning('Loading...')
 
 let url = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(value)}&units=metric&lang=pt_br&appid=d0107bd3d458018621e34b7d2195ba96`)
 
@@ -21,7 +21,7 @@ if(json.cod === 200){
             windDeg: json.wind.deg
         })
 } else {
-    warning('Cidade não encontrada!!')
+    warning('City cant be found!!')
 }
 })
 
@@ -44,6 +44,8 @@ function showInfo(obj){
     document.querySelector('.temp img').setAttribute('src', `http://openweathermap.org/img/wn/${obj.tempIcon}@2x.png`)
 
     document.querySelector('.ventoInfo').innerHTML = `${obj.windSpeed}<span>km/h</span>`
+
+    document.querySelector('ventoPonto').style.transform = `rotate(${obj.windDeg - 90}deg)`
 
     document.querySelector('.resultado').style.display = 'block'
 }
